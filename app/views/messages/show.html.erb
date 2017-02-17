@@ -1,33 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-8 col-md-2">
+  <div class="message-show">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @message.title %>
-</p>
+    <p>
+      <strong>Title:</strong>
+      <%= @message.title %>
+    </p>
 
-<p>
-  <strong>Posted by:</strong>
-  <%= @message.user.email %> <%= time_ago_in_words(@message.created_at) %> ago
-</p>
-
-
-<p>
-  <strong>Description:</strong>
-  <%= @message.description %>
-</p>
-
-<h3>Comments</h3>
-<%= render @message.comments %>
-
-  <h3>Reply to Message</h3>
-  <%= render 'comments/form' %> <br>
+    <p class="message-posted-by">
+      <strong>Posted by:</strong>
+      <%= @message.user.email %> <%= time_ago_in_words(@message.created_at) %> ago
+    </p>
 
 
-  <% if user_signed_in? %>
-    <% if @message.user_id == current_user.id %>
-        <%= link_to 'Edit', edit_message_path(@message), class: "btn btn-success" %> |
+    <p class="message-desc">
+      <strong>Description:</strong>
+      <%= @message.description %>
+    </p>
 
-        <%= link_to 'Delete', message_path(@message), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %> |
-  <% end %>
-  <%= link_to 'View Messages', messages_path, class: "btn btn-info" %>
-<% end %>
+    <h3>Comments</h3>
+    <%= render @message.comments %>
+
+      <h3 class="reply-to-msg">Reply to Message</h3>
+      <%= render 'comments/form' %>
+
+     <div class="links btn group">
+       <% if user_signed_in? %>
+         <% if @message.user_id == current_user.id %>
+             <%= link_to 'Edit', edit_message_path(@message), class: "btn btn-success" %> |
+
+             <%= link_to 'Delete', message_path(@message), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %> |
+       <% end %>
+       <%= link_to 'View Messages', messages_path, class: "btn btn-info" %>
+       <% end %>
+
+     </div>
+
+  </div>
+</div>
